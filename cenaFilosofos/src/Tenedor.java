@@ -9,15 +9,22 @@ public class Tenedor {
         this.disponible = disponible;
     }
 
-    public void coger() {
+    public synchronized void coger() {
+            if(this.disponible==false){
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            this.setDisponible(false);
-
-
+            }
+            this.disponible = false;
 
     }
-    public void dejar() {
+    public synchronized void dejar() {
+
             this.setDisponible(true);
+            notifyAll();
 
         }
 

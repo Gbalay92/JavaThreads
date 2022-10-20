@@ -1,12 +1,12 @@
 
 public class App {
-    private static final Tenedor t1=new Tenedor();
-    private static final Tenedor t2=new Tenedor();
-    private static final Tenedor t3=new Tenedor();
-    private static final Tenedor t4=new Tenedor();
-    private static final Tenedor t5=new Tenedor();
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        Tenedor t1=new Tenedor();
+        Tenedor t2=new Tenedor();
+        Tenedor t3=new Tenedor();
+        Tenedor t4=new Tenedor();
+        Tenedor t5=new Tenedor();
 
         Filosofo filosofo1 =new Filosofo("Gonzalo", t1,t2);
         Filosofo filosofo2 =new Filosofo("Alberto", t2,t3);
