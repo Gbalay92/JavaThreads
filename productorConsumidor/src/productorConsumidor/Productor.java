@@ -14,6 +14,12 @@ public class Productor implements Runnable{
         for (int i = 0; i < 10; i++) {
             char c = letras.charAt((int)(Math.random()*letras.length()));
             buffer.poner(c);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             System.out.println(i+"Producor: "+c);
         }
     }

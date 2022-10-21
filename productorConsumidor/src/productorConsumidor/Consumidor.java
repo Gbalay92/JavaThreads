@@ -7,8 +7,15 @@ public class Consumidor implements Runnable{
     }
     @Override
     public void run() {
+
         char valor;
+
         for (int i = 0; i < 10; i++) {
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             valor= buffer.recoger();
             System.out.println(i+"Consumidor: "+valor);
         }
