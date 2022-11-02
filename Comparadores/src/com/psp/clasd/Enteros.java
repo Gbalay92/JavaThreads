@@ -37,8 +37,8 @@ public class Enteros extends Thread {
     }
 
     public void mayorMenor() {
-        int numeroMayor = 0;
-        int numeroMenor = 0;
+        int numeroMayor = enteros.get(0);
+        int numeroMenor = enteros.get(0);
         for (int i = 1; i < enteros.size(); i++) {
             int numero = enteros.get(i);
             if (numero > numeroMayor) {

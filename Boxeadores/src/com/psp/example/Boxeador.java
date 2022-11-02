@@ -27,8 +27,9 @@ public class Boxeador implements Runnable{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println(this.nombre+this.vida);
             pegar();
+            System.out.println(this.nombre+this.oponente.vida);
+
 
         }if(this.vida<=0){
             System.out.println(this.nombre + " ha perdido");
