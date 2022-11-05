@@ -1,45 +1,43 @@
 
-public class Filosofo implements Runnable{
+public class Filosofo extends Thread{
     private boolean cenado=false;
+    private Mesa mesa;
     private String nombre;
-    private Tenedor t1;
-    private Tenedor t2;
-    public Filosofo(String nombre,Tenedor t1, Tenedor t2) {
-        this.t1 = t1;
-        this.t2 = t2;
+    private Tenedor tenedor1;
+    private Tenedor tenedor2;
+
+    public Filosofo(String nombre, Mesa mesa, Tenedor tenedor1,Tenedor tenedor2, boolean cenado) {
+        super(nombre);
         this.nombre = nombre;
+        this.cenado = cenado;
+        this.mesa = mesa;
+        this.tenedor1=tenedor1;
+        this.tenedor2=tenedor2;
+
     }
 
-    public synchronized void cenar() {
-        while(this.t1.isDisponible() || this.t2.isDisponible()) {
-            if(this.t1.isDisponible() && this.t2.isDisponible()){
-                this.t1.coger();
-                this.t2.coger();
-                try {
-                    System.out.println("el filosofo "+ this.nombre+" esta cenando");
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+    public void cenar(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+        this.cenado=true;
+        if(this.cenado){
+            System.out.println(this.nombre + " ha cenado");
         }
 
-
     }
 
 
 
-    public synchronized void run(){
-            cenar();
-            t1.dejar();
-            t2.dejar();
-            this.cenado=true;
-        if(this.isCenado()){
-            System.out.println("El filosofo "+ this.nombre+ " ya ha cenado");
-        }
+    @Override
+    public void run() {
+        mesa.coger(this.tenedor1, this.tenedor2);
+        cenar();
+        mesa.devolver(this.tenedor1,this.tenedor2);
+
     }
 
-    private boolean isCenado() {
-        return this.cenado;
-    }
+
 }

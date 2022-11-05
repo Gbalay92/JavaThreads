@@ -1,24 +1,27 @@
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class App {
-
+    private static CopyOnWriteArrayList<Tenedor> tenedores = new CopyOnWriteArrayList();
     public static void main(String[] args) {
-        Tenedor t1=new Tenedor();
-        Tenedor t2=new Tenedor();
-        Tenedor t3=new Tenedor();
-        Tenedor t4=new Tenedor();
-        Tenedor t5=new Tenedor();
+        for (int i = 0; i < 5; i++) {
+            tenedores.add(new Tenedor(true));
 
-        Filosofo filosofo1 =new Filosofo("Gonzalo", t1,t2);
-        Filosofo filosofo2 =new Filosofo("Alberto", t2,t3);
-        Filosofo filosofo3 =new Filosofo("Ramon", t3,t4);
-        Filosofo filosofo4 =new Filosofo("Pablo", t4,t5);
-        Filosofo filosofo5 =new Filosofo("David", t5,t1);
+        }
+        Mesa mesa = new Mesa(tenedores);
 
-        new Thread(filosofo1).start();
-        new Thread(filosofo2).start();
-        new Thread(filosofo3).start();
-        new Thread(filosofo4).start();
-        new Thread(filosofo5).start();
+        Filosofo gonzalo = new Filosofo("Gonzalo", mesa, mesa.tenedores.get(0),mesa.tenedores.get(1),false);
+        Filosofo ramon = new Filosofo("Ramon", mesa,mesa.tenedores.get(1),mesa.tenedores.get(2), false);
+        Filosofo alberto = new Filosofo("Alberto", mesa,mesa.tenedores.get(2),mesa.tenedores.get(3),false);
+        Filosofo pablo = new Filosofo("Pablo",  mesa,mesa.tenedores.get(3), mesa.tenedores.get(4),false);
+        Filosofo david = new Filosofo("David", mesa,mesa.tenedores.get(4),mesa.tenedores.get(0),false);
+
+        gonzalo.start();
+        ramon.start();
+        alberto.start();
+        pablo.start();
+        david.start();
+
+
 
     }
 }
