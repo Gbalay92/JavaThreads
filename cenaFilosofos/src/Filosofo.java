@@ -6,10 +6,9 @@ public class Filosofo extends Thread{
     private Tenedor tenedor1;
     private Tenedor tenedor2;
 
-    public Filosofo(String nombre, Mesa mesa, Tenedor tenedor1,Tenedor tenedor2, boolean cenado) {
+    public Filosofo(String nombre, Mesa mesa, Tenedor tenedor1,Tenedor tenedor2) {
         super(nombre);
         this.nombre = nombre;
-        this.cenado = cenado;
         this.mesa = mesa;
         this.tenedor1=tenedor1;
         this.tenedor2=tenedor2;
@@ -18,7 +17,9 @@ public class Filosofo extends Thread{
 
     public void cenar(){
         try {
+            System.out.println(this.nombre +" esta cenando..");
             Thread.sleep(1000);
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

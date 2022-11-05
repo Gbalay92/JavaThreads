@@ -1,16 +1,16 @@
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Mesa {
-    CopyOnWriteArrayList<Tenedor> tenedores;
 
 
-    public Mesa(CopyOnWriteArrayList<Tenedor> tenedores) {
-        this.tenedores = tenedores;
+    public Mesa() {
     }
     public synchronized void coger(Tenedor tenedor1, Tenedor tenedor2){
         if(!tenedor1.getDisponible() || !tenedor2.getDisponible()){
             try {
+                System.out.println(Thread.currentThread().getName() + " esta esperando.. ");
                 wait();
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -19,11 +19,14 @@ public class Mesa {
         tenedor2.setDisponible(false);
 
 
+
+
     }
     public synchronized void devolver(Tenedor tenedor1, Tenedor tenedor2) {
         tenedor1.setDisponible(true);
         tenedor2.setDisponible(true);
         notify();
+
     }
 
 }
