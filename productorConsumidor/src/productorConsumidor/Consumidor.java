@@ -3,6 +3,7 @@ package productorConsumidor;
 import java.util.concurrent.Semaphore;
 
 public class Consumidor implements Runnable{
+    private static Object bloqueo=new Object();
     Semaphore semaforo = new Semaphore(2);
     private Buffer buffer;
     public Consumidor(Buffer buffer) {
@@ -21,8 +22,8 @@ public class Consumidor implements Runnable{
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            valor= buffer.recoger();
-            System.out.println(Thread.currentThread().getName()+" Consumidor: "+valor);
+
+          synchronized(bloqueo){System.out.println(i + Thread.currentThread().getName()+" Consumidor: "+ buffer.recoger());}
         }
             semaforo.release();
         } catch (InterruptedException e) {

@@ -1,31 +1,21 @@
 package productorConsumidor;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class Buffer {
-    private char contenido;
+    private CopyOnWriteArrayList<Character> contenido = new CopyOnWriteArrayList<Character>();
     private boolean disponible = false;
 
-    public synchronized char recoger()  {
-        while(disponible==false) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                System.err.println("error en la espera del hilo");
-            }
-        }
+    public  Character recoger()  {
+        Character letra=contenido.get(0);
+        contenido.remove(letra);
         disponible=false;
-        notify();
-        return contenido;
+        return letra;
 
     }
-    public synchronized void poner(char c){
-       while(disponible){
-           try {
-               wait();
-           } catch (InterruptedException e) {
-               System.err.println("error en la espera del hilo");
-           }
-       }contenido=c;
+    public void poner(char c){
+       contenido.add(c);
        disponible=true;
-       notify();
+
     }
 }
