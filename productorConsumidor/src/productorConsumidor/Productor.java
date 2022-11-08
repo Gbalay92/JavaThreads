@@ -11,7 +11,7 @@ public class Productor implements Runnable{
 
     @Override
     public void run() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             char c = letras.charAt((int)(Math.random()*letras.length()));
             buffer.poner(c);
             try {
