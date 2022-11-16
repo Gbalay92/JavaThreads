@@ -18,7 +18,6 @@ public class Cliente implements Runnable{
         float i=0;
         int copas = (int) (Math.random() * 3 + 1);
         while (i < 24.0 && barril.getCantidad()>0) {
-
             barril.beber(copas);
             System.out.println("El cliente " + this.nombre + " consume " + copas +" copas");
             try {
