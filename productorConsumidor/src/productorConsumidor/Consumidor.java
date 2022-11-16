@@ -23,7 +23,7 @@ public class Consumidor implements Runnable{
                 throw new RuntimeException(e);
             }
 
-          synchronized(bloqueo){System.out.println(i + Thread.currentThread().getName()+" Consumidor: "+ buffer.recoger());}
+            System.out.println(i + Thread.currentThread().getName()+" Consumidor: "+ buffer.recoger());
         }
             semaforo.release();
         } catch (InterruptedException e) {

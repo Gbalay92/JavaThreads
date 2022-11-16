@@ -11,6 +11,7 @@ public class Concatenador implements Runnable {
 
     @Override
     public void run() {
+
         System.out.print("La palabra resultante de sumar las 3 primeras letras de cada palabra es: ");
         for (int i = 0; i < 3; i++) {
             System.out.print(String.valueOf(this.cadena1[i]));

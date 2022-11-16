@@ -16,9 +16,6 @@ public class App {
 
     }
 
-
-
-
     private static void pedirPalabras() {
         System.out.println("Introduzca palabra 1: ");
         palabra1 = new Scanner(System.in).next();
